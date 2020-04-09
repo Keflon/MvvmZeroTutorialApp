@@ -38,8 +38,14 @@ And here it is ...
 
 ![Image of the default UWP application running before any changes have been made](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/DefaultApplicationRunningUwp.png "Default app UWP")
 
+### Projects in the Solution
+Your Visual Studio Solution will contain one platform-specific project for each target platform you have choosen to support. We will not be making any changes to those  
+All of our work will be in the cross-platform project `MvvmZeroTutorialApp`  
+
+![Image of Solution Tree showing the project in which we will be working](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/OnlyWorkingInMvvmZeroTutorialAppProject.png "MvvmZeroTutorialApp project")
+
 ### Now add two NuGet packages
-OnlyWorkingInMvvmZeroTutorialAppProject
+
 
 Right-click->Manage NuGet packages...  
 ![Image showing context menu to launch the Nuget package manager](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/LaunchManageNuGetPackages.png "Manage NuGet packages")
@@ -63,8 +69,8 @@ Add these folders to the project (Right-click->Add->New Folder ...)
 ![Dialog for adding a Content Page](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/AddContentPage.png "Add ContentPage")
 
 ### Add the rest of our `ContentPages`
-- CabbagePage.xaml
-- OnionPage.xaml
+- CabbagesPage.xaml
+- OnionsPage.xaml
 - ResultsPage.xaml
 
 The Solution tree should now look like this:  
@@ -80,11 +86,11 @@ One `ViewModel` for each `ContentPage`
 ![Image of dialog for adding a POCO class](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/AddClassHomePage.png "Logo Title Text 1")
 
 ### Now add the remaining ViewModel classes
-- Mvvm/ViewModels/CabbagePageVm.cs
-- Mvvm/ViewModels/OnionPageVm.cs
-- Mvvm/ViewModels/ResultsPageVm.cs
-- Mvvm/PageViewModels/TutorialBaseVm.cs
-- Mvvm/Boilerplate/Locator.cs
+- Mvvm/PageViewModels/CabbagesPageVm.cs
+- Mvvm/PageViewModels/OnionsPageVm.cs
+- Mvvm/PageViewModels/ResultsPageVm.cs
+- Mvvm/ViewModels/TutorialBaseVm.cs
+- Mvvm/PageBoilerplate/Locator.cs
 
 ### The Solution tree should now to look like this:  
 ![Image of the full Solution Tree with our additions highlighted](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/FullSolutionTree.png "Full Solution Tree")
@@ -397,8 +403,8 @@ public void Init(string payload)
     throw new NotImplementedException();
 }
 ```
-### Now write the xaml for CabbagesPage
-Replace the Page content with the following
+### Now write the UI for CabbagesPage
+Replace the Page content in `CabbagesPage.xaml` with the following
 ```xml
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
@@ -411,6 +417,7 @@ Replace the Page content with the following
 ```
 
 ### Now for the ResultsPage. First the ViewModel ...
+Replace the contents of `ResultsPageVm.cs` with the following
 ```csharp
 using FunctionZero.CommandZero;
 using FunctionZero.MvvmZero;
@@ -448,7 +455,7 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
 
 ```
 
-### ... then in ResultsPage.xaml, replace the page content with this:
+### ... then in ResultsPage.xaml, replace the page content with this
 ```xml
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
@@ -496,7 +503,7 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
     }
 }
 ```
-... and the xaml for OnionsPage.xaml
+... and the UI for OnionsPage.xaml
 ```xml
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
@@ -505,7 +512,7 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
         </StackLayout>
     </ContentPage.Content>
 ```
-And there you have it. A cross-platform app for iOS, Android and UWP using the MVVM pattern, dependency injection and an IoC container!
+And there you have it. A cross-platform app for iOS, Android and UWP using the MVVM pattern, dependency injection and an IoC container!  
 To run this on an Android device
 - Enable developer mode on the device (often by tapping on the build number in settings 5 times)
 - Plug it into your PC
