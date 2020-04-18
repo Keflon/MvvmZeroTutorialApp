@@ -53,6 +53,8 @@ Right-click->Manage NuGet packages...
 ### Install MvvmZero
 ![Image showing how to install Mvvm Zero using NuGet](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/InstallMvvmZero.png "Install MvvmZero")
 
+Note that installing MvvmZero also installs FunctionZero.CommandZero. You can read about it [here](https://github.com/Keflon/FunctionZero.CommandZero)
+
 ### While you're there, also add SimpleInjector
 ![Image showing how to install Simple Injector using NuGet](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/InstallSimpleInjector.png "Install SimpleInjector")
 
@@ -86,10 +88,13 @@ One `ViewModel` for each `ContentPage`
 ![Image of dialog for adding a POCO class](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/AddClassHomePage.png "Logo Title Text 1")
 
 ### Now add the remaining ViewModel classes
+#### In the Mvvm/PageViewModels folder
 - Mvvm/PageViewModels/CabbagesPageVm.cs
 - Mvvm/PageViewModels/OnionsPageVm.cs
 - Mvvm/PageViewModels/ResultsPageVm.cs
+#### In the Mvvm/ViewModels folder
 - Mvvm/ViewModels/TutorialBaseVm.cs
+#### In the Mvvm/PageBoilerplate folder
 - Mvvm/PageBoilerplate/Locator.cs
 
 ### The Solution tree should now to look like this:  
@@ -239,9 +244,11 @@ The `HomePage` will have two `Buttons` so we'll need two `Commands` for the `But
 The `Commands` navigate to new `Pages`, so we'll need the instance of `PageServiceZero` described in `Locator.cs`  
 - As we're using an IoC container, it is simply a case of adding `IPageServiceZero` as a constructor parameter and the container will do the rest
 
-For our `ICommand` implementation we're using `CommandZeroAsync` , documented [here](https://github.com/Keflon/FunctionZero.CommandZero)  
-If you have a preferred implementation feel free to use that instead or write your own  
-Paste the following into HomePageVm.cs:
+Installing `MvvmZero` automatically installed `FunctionZero.CommandZero` and that contains the `ICommand` implemetation 
+we're going to use, documented [here](https://github.com/Keflon/FunctionZero.CommandZero)  
+If you have a preferred implementation feel free to use that instead
+
+Now paste the following into HomePageVm.cs:
 ```csharp
 using FunctionZero.CommandZero;
 using FunctionZero.MvvmZero;
