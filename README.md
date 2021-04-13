@@ -132,9 +132,11 @@ namespace MvvmZeroTutorialApp.Mvvm.Boilerplate
 				() =>
 				{
 					// This is how we create an instance of PageServiceZero.
-					// The PageService needs to know how to make Page and ViewModel instances so we provide it with a factory
+					// The PageService needs to know how to get the current NavigationPage it is to interact with.
+					// (If you have a FlyoutPage at the root, the navigationGetter should return the current Detail item)
+					// It also needs to know how to get Page and ViewModel instances so we provide it with a factory
 					// that uses the IoC container. We could easily provide any sort of factory, we don't need to use an IoC container.
-					var pageService = new PageServiceZero(currentApplication, (theType) => _IoCC.GetInstance(theType), PageCreated);
+					var pageService = new PageServiceZero(() => App.Current.MainPage.Navigation, (theType) => _IoCC.GetInstance(theType));
 					return pageService;
 				},
 				// One only ever will be created.
@@ -142,16 +144,16 @@ namespace MvvmZeroTutorialApp.Mvvm.Boilerplate
 			);
 
 			// Tell the IoC container about our Pages.
-			_IoCC.Register<HomePage>(Lifestyle.Transient);
-			_IoCC.Register<CabbagesPage>(Lifestyle.Transient);
-			_IoCC.Register<OnionsPage>(Lifestyle.Transient);
-			_IoCC.Register<ResultsPage>(Lifestyle.Transient);
+			_IoCC.Register<HomePage>(Lifestyle.Singleton);
+			_IoCC.Register<CabbagesPage>(Lifestyle.Singleton);
+			_IoCC.Register<OnionsPage>(Lifestyle.Singleton);
+			_IoCC.Register<ResultsPage>(Lifestyle.Singleton);
 
 			// Tell the IoC container about our ViewModels.
-			_IoCC.Register<HomePageVm>(Lifestyle.Transient);
-			_IoCC.Register<CabbagesPageVm>(Lifestyle.Transient);
-			_IoCC.Register<OnionsPageVm>(Lifestyle.Transient);
-			_IoCC.Register<ResultsPageVm>(Lifestyle.Transient);
+			_IoCC.Register<HomePageVm>(Lifestyle.Singleton);
+			_IoCC.Register<CabbagesPageVm>(Lifestyle.Singleton);
+			_IoCC.Register<OnionsPageVm>(Lifestyle.Singleton);
+			_IoCC.Register<ResultsPageVm>(Lifestyle.Singleton);
 
 			// Optionally add more to the IoC conatainer, e.g. loggers, Http comms objects etc. E.g.
 			// IoCC.Register<ILogger, MyLovelyLogger>(Lifestyle.Singleton);
@@ -162,6 +164,12 @@ namespace MvvmZeroTutorialApp.Mvvm.Boilerplate
 		/// </summary>
 		internal async Task SetFirstPage()
 		{
+			// Create and assign a top-level NavigationPage.
+			// If you use a FlyoutPage instead then its Detail item will need to be a NavigationPage
+			// and you will need to modify the 'navigationGetter' provided to the PageServiceZero instance to 
+			// something like this:
+            // () => ((FlyoutPage)App.Current.MainPage).Detail.Navigation
+			App.Current.MainPage = new NavigationPage();
 			// Ask the PageService to assemble and present our HomePage ...
 			await _IoCC.GetInstance<IPageServiceZero>().PushPageAsync<HomePage, HomePageVm>((vm) => {/* Optionally interact with the vm, e.g. to inject seed-data */ });
 		}
