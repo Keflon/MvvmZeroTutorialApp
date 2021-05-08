@@ -10,7 +10,7 @@
             <Label Text="Cabbages Page!"/>
             <Label Text="Please tell me your name ..."/>
             <Editor Text="{Binding Name}" Placeholder="Minimum 4 characters please"/>
-            <Button Command="{Binding NextCommand}" Text="{Binding NextCommand.FriendlyName}"/>
+            <Button Command="{Binding NextCommand}" Text="{Binding NextCommand.Text}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

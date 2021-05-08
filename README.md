@@ -252,7 +252,7 @@ The `HomePage` will have two `Buttons` so we'll need two `Commands` for the `But
 The `Commands` navigate to new `Pages`, so we'll need the instance of `PageServiceZero` described in `Locator.cs`  
 - As we're using an IoC container, it is simply a case of adding `IPageServiceZero` as a constructor parameter and the container will do the rest
 
-Installing `MvvmZero` automatically installed `FunctionZero.CommandZero` and that contains the `ICommand` implemetation 
+Installing `MvvmZero` automatically installed `FunctionZero.CommandZero` and that contains the `ICommand` implementation 
 we're going to use, documented [here](https://github.com/Keflon/FunctionZero.CommandZero)  
 If you have a preferred implementation feel free to use that instead
 
@@ -289,17 +289,17 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
             _pageService = pageService;
 
             // Set up our commands for the UI to bind to ...
-            CabbagesPageCommand = new CommandBuilder().SetExecute(CabbagesPageCommandExecute).SetName("Cabbages").Build();
-            OnionsPageCommand = new CommandBuilder().SetExecute(OnionsPageCommandExecute).SetName("Onions").Build();
+            CabbagesPageCommand = new CommandBuilder().SetExecuteAsync(CabbagesPageCommandExecuteAsyncAsync).SetName("Cabbages").Build();
+            OnionsPageCommand = new CommandBuilder().SetExecuteAsync(OnionsPageCommandExecute).SetName("Onions").Build();
         }
 
-        private async Task CabbagesPageCommandExecute(/* Optional : object arg */)
+        private async Task CabbagesPageCommandExecuteAsync(/* Optional : object arg */)
         {
             // Take us to the CabbagesPage page ...
             await _pageService.PushPageAsync<CabbagesPage, CabbagesPageVm>((vm) => { /* Initialize the vm in here if necessary */ });
         }
 
-        private async Task OnionsPageCommandExecute(/* Optional : object arg */)
+        private async Task OnionsPageCommandExecuteAsync(/* Optional : object arg */)
         {
             // Take us to the OnionsPage page ...
             await _pageService.PushPageAsync<OnionsPage, OnionsPageVm>((vm) => { /* Initialize the vm in here if necessary */ });
@@ -315,8 +315,8 @@ Replace the Page content with the following. MvvmZero will automatically set the
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <Label Text="Make your choice"/>
-            <Button Command="{Binding CabbagesPageCommand}" Text="{Binding CabbagesPageCommand.FriendlyName}"/>
-            <Button Command="{Binding OnionsPageCommand}" Text="{Binding OnionsPageCommand.FriendlyName}"/>
+            <Button Command="{Binding CabbagesPageCommand}" Text="{Binding CabbagesPageCommand.Text}"/>
+            <Button Command="{Binding OnionsPageCommand}" Text="{Binding OnionsPageCommand.Text}"/>
         </StackLayout>
     </ContentPage.Content>
 ```
@@ -376,16 +376,16 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
 
             // Set up our Command for the UI to bind to ...
             NextCommand = new CommandBuilder()
-                .SetExecute(NextCommandExecute)
+                .SetExecuteAsync(NextCommandExecuteAsync)
                 .SetCanExecute(NextCommandCanExecute)
                 .SetName(GetCurrentName)
-                // This command can enable or disable itself or change its FriendlyName if the 'Name' property changes
+                // This command can enable or disable itself or change its Text if the 'Name' property changes
                 .AddObservedProperty(this, nameof(Name))
                 .Build();
         }
 
         // When the NextCommand is invoked (by the UI) this method is called to take us to the results page
-        private async Task NextCommandExecute(object arg)
+        private async Task NextCommandExecuteAsync(object arg)
         {
             string payload = $"The Cabbages Page has been visited by {Name}";
 
@@ -426,7 +426,7 @@ Replace the Page content in `CabbagesPage.xaml` with the following
             <Label Text="Cabbages Page!"/>
             <Label Text="Please tell me your name ..."/>
             <Editor Text="{Binding Name}" Placeholder="Minimum 4 characters please"/>
-            <Button Command="{Binding NextCommand}" Text="{Binding NextCommand.FriendlyName}"/>
+            <Button Command="{Binding NextCommand}" Text="{Binding NextCommand.Text}"/>
         </StackLayout>
     </ContentPage.Content>
 ```
@@ -458,7 +458,7 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
         /// <param name="pageService"></param>
         public ResultsPageVm(IPageServiceZero pageService)
         {
-            StartAgainCommand = new CommandBuilder().SetExecute(async () => await pageService.PopToRootAsync()).SetName("Restart").Build();
+            StartAgainCommand = new CommandBuilder().SetExecuteAsync(async () => await pageService.PopToRootAsync()).SetName("Restart").Build();
         }
 
         public void Init(string payload)
@@ -476,7 +476,7 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <Label Text="Results Page!"/>
             <Label Text="{Binding DisplayText}"/>
-            <Button Command="{Binding StartAgainCommand}" Text="{Binding StartAgainCommand.FriendlyName}"/>
+            <Button Command="{Binding StartAgainCommand}" Text="{Binding StartAgainCommand.Text}"/>
         </StackLayout>
     </ContentPage.Content>
 ```
@@ -511,7 +511,7 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
         public OnionsPageVm(IPageServiceZero pageService)
         {
             NextCommand = new CommandBuilder()
-                .SetExecute(() => pageService.PushPageAsync<ResultsPage, ResultsPageVm>((vm) => vm.Init("Hello from the Onions Page!")))
+                .SetExecuteAsync(() => pageService.PushPageAsync<ResultsPage, ResultsPageVm>((vm) => vm.Init("Hello from the Onions Page!")))
                 .SetName("Next")
                 .Build();
         }
@@ -523,7 +523,7 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
             <Label Text="Welcome to the Onions Page" />
-            <Button Command="{Binding NextCommand}" Text="{Binding NextCommand.FriendlyName}"/>
+            <Button Command="{Binding NextCommand}" Text="{Binding NextCommand.Text}"/>
         </StackLayout>
     </ContentPage.Content>
 ```

@@ -8,7 +8,7 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
             <Label Text="Welcome to the Onions Page" />
-            <Button Command="{Binding NextCommand}" Text="{Binding NextCommand.FriendlyName}"/>
+            <Button Command="{Binding NextCommand}" Text="{Binding NextCommand.Text}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -42,16 +42,16 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
 
             // Set up our Command for the UI to bind to ...
             NextCommand = new CommandBuilder()
-                .SetExecute(NextCommandExecute)
+                .SetExecuteAsync(NextCommandExecuteAsync)
                 .SetCanExecute(NextCommandCanExecute)
                 .SetName(GetCurrentName)
-                // This command can enable or disable itself or change its FriendlyName if the 'Name' property changes
+                // This command can enable or disable itself or change its Text if the 'Name' property changes
                 .AddObservedProperty(this, nameof(Name))
                 .Build();
         }
 
         // When the NextCommand is invoked (by the UI) this method is called to take us to the results page
-        private async Task NextCommandExecute(object arg)
+        private async Task NextCommandExecuteAsync(object arg)
         {
             string payload = $"The Cabbages Page has been visited by {Name}";
 

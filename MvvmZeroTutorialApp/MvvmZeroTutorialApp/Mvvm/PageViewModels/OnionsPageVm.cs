@@ -22,7 +22,7 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
         public OnionsPageVm(IPageServiceZero pageService)
         {
             NextCommand = new CommandBuilder()
-                .SetExecute(() => pageService.PushPageAsync<ResultsPage, ResultsPageVm>((vm) => vm.Init("Hello from the Onions Page!")))
+                .SetExecuteAsync(() => pageService.PushPageAsync<ResultsPage, ResultsPageVm>((vm) => vm.Init("Hello from the Onions Page!")))
                 .SetName("Next")
                 .Build();
         }

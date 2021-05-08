@@ -8,8 +8,8 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <Label Text="Make your choice"/>
-            <Button Command="{Binding CabbagesPageCommand}" Text="{Binding CabbagesPageCommand.FriendlyName}"/>
-            <Button Command="{Binding OnionsPageCommand}" Text="{Binding OnionsPageCommand.FriendlyName}"/>
+            <Button Command="{Binding CabbagesPageCommand}" Text="{Binding CabbagesPageCommand.Text}"/>
+            <Button Command="{Binding OnionsPageCommand}" Text="{Binding OnionsPageCommand.Text}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

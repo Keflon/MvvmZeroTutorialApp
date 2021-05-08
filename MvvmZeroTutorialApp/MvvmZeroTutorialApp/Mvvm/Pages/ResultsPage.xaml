@@ -9,7 +9,7 @@
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <Label Text="Results Page!"/>
             <Label Text="{Binding DisplayText}"/>
-            <Button Command="{Binding StartAgainCommand}" Text="{Binding StartAgainCommand.FriendlyName}"/>
+            <Button Command="{Binding StartAgainCommand}" Text="{Binding StartAgainCommand.Text}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

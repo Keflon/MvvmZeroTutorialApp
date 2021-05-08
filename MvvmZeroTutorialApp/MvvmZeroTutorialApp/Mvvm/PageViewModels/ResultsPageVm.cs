@@ -22,7 +22,7 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
         /// <param name="pageService"></param>
         public ResultsPageVm(IPageServiceZero pageService)
         {
-            StartAgainCommand = new CommandBuilder().SetExecute(async () => await pageService.PopToRootAsync()).SetName("Restart").Build();
+            StartAgainCommand = new CommandBuilder().SetExecuteAsync(async () => await pageService.PopToRootAsync()).SetName("Restart").Build();
         }
 
         public void Init(string payload)
