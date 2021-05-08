@@ -1,4 +1,4 @@
-# MvvmTutorialApp
+# MvvmZeroTutorialApp
 A very simple application demonstrating how to use `FunctionZero.MvvmZero` and `Xamarin.Forms` to build a cross-platform application using 
 the MVVM pattern, dependency injection and an IoC container
 
