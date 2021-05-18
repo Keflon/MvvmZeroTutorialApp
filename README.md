@@ -289,8 +289,8 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
             _pageService = pageService;
 
             // Set up our commands for the UI to bind to ...
-            CabbagesPageCommand = new CommandBuilder().SetExecuteAsync(CabbagesPageCommandExecuteAsyncAsync).SetName("Cabbages").Build();
-            OnionsPageCommand = new CommandBuilder().SetExecuteAsync(OnionsPageCommandExecute).SetName("Onions").Build();
+            CabbagesPageCommand = new CommandBuilder().SetExecuteAsync(CabbagesPageCommandExecuteAsync).SetName("Cabbages").Build();
+            OnionsPageCommand = new CommandBuilder().SetExecuteAsync(OnionsPageCommandExecuteAsync).SetName("Onions").Build();
         }
 
         private async Task CabbagesPageCommandExecuteAsync(/* Optional : object arg */)
