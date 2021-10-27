@@ -2,6 +2,10 @@
 A very simple application demonstrating how to use `FunctionZero.MvvmZero` and `Xamarin.Forms` to build a cross-platform application using 
 the MVVM pattern, dependency injection and an IoC container
 
+## Update
+After a recent change, you may need to update your `Xamarin.Forms` packages before you install `MvvmZero`. 
+This document has been [updated](#install-mvvmzero) accordingly.
+
 ## Quickstart
 **Launch Visual Studio, grab a coffee and before it's gone cold you'll have an app!**
 
@@ -20,7 +24,6 @@ If any of this is new to you, all will become clear!
 
 ### Create new Mobile App (Xamarin.Forms)
 ![Image of dialog showing creation of a Xamarin Forms project](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/CreateNewXamarinFormsProject.png "Create new project")
-
 
 ### Give it a name
 ![Dialog for Configure Project](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/ConfigureProject.png "Configure your new project")  
@@ -51,9 +54,14 @@ Right-click->Manage NuGet packages...
 ![Image showing context menu to launch the Nuget package manager](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/LaunchManageNuGetPackages.png "Manage NuGet packages")
 
 ### Install MvvmZero
+
+*Please note: You may need to update your `Xamarin.Forms` package before `MvvmZero` will install. To do so,
+Right-click on the **Solution**->Manage NuGet Packages **for Solution**, ensure 'Include prerelease' is not checked, check 'Select all packages', click 'Update'*  
+
+
 ![Image showing how to install Mvvm Zero using NuGet](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/InstallMvvmZero.png "Install MvvmZero")
 
-Note that installing MvvmZero also installs FunctionZero.CommandZero. You can read about it [here](https://github.com/Keflon/FunctionZero.CommandZero)
+Note that installing MvvmZero also installs FunctionZero.CommandZero automatically. You can read about CommandZero [here](https://github.com/Keflon/FunctionZero.CommandZero)
 
 ### While you're there, also add SimpleInjector
 ![Image showing how to install Simple Injector using NuGet](https://github.com/Keflon/MvvmZeroTutorialApp/raw/master/Images/InstallSimpleInjector.png "Install SimpleInjector")
