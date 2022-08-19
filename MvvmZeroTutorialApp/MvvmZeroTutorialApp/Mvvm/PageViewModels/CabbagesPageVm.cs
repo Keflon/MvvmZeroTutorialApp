@@ -23,6 +23,9 @@ namespace MvvmZeroTutorialApp.Mvvm.PageViewModels
                 if (value != _name)
                 {
                     _name = value;
+                    // NOTE: TutorialBaseVm implements INotifyPropertyChanged.
+                    // If it did not, we must add the interface to our class definition
+                    // otherwise the Bindings in XAML would not be able to track changes to any properies in the class.
                     OnPropertyChanged();
                 }
             }
